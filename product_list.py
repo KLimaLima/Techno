@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-if __name__ == "__main__":
+def get_product_list(page_num: int):
 
-    page_num = 1
+    # page_num = 1
     # url = f"https://cikgumall.com/shop-2/page/{page_num}" # This link is deprecated 27/11/2025
 
     url = f"https://cikgumall.com/page/{page_num}/?product_cat=0&s&post_type=product" # This one is for "all" category
@@ -27,12 +27,16 @@ if __name__ == "__main__":
 
     print(count)
 
-    with open("product_list.txt", "w", encoding="utf-8") as f:
+    with open(f"product_list_{page_num}.txt", "w", encoding="utf-8") as f:
         for product_iter in tag_li:
             product_title = product_iter.find_all(attrs={"class":"woocommerce-LoopProduct-link woocommerce-loop-product__link"})
-            print(product_title[0].get('href'))
+            # print(product_title[0].get('href'))
 
             f.write(f"{product_title[0].get('href')}\n")
 
 # with open("file.txt", "r", encoding="utf-8") as f:
 #     print(f.read())
+
+if __name__ == "__main__":
+
+    get_product_list(1)
