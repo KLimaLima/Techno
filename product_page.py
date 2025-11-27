@@ -35,5 +35,5 @@ if __name__ == "__main__":
 
     img_data = requests.get(found_src.group(1)).content
 
-    with open("test_img.jpg", "wb") as f:
+    with open("image/test_img.jpg", "wb") as f:
         f.write(img_data)

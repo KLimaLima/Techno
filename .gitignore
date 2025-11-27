@@ -1,5 +1,6 @@
 # Defined ignores
-*.txt
+product_list/
+image/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -27,7 +27,7 @@ def get_product_list(page_num: int):
 
     print(count)
 
-    with open(f"product_list_{page_num}.txt", "w", encoding="utf-8") as f:
+    with open(f"product_list/product_list_{page_num}.txt", "w", encoding="utf-8") as f:
         for product_iter in tag_li:
             product_title = product_iter.find_all(attrs={"class":"woocommerce-LoopProduct-link woocommerce-loop-product__link"})
             # print(product_title[0].get('href'))
