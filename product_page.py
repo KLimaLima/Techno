@@ -1,11 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 if __name__ == "__main__":
 
     # url = "https://cikgumall.com/product/special-teega-choco-lava-55g/"
     # url = "https://cikgumall.com/product/teega-machos-cheezy-45g/"
-    # url = "https://cikgumall.com/product/reevo-chocolate-malt-drink-1kg/"
+    url = "https://cikgumall.com/product/reevo-chocolate-malt-drink-1kg/"
 
     response = requests.get(url)
 
@@ -21,4 +22,18 @@ if __name__ == "__main__":
 
     long_desc = soup.find(attrs={"class":"motta-dropdown__content"})
     print(3)
-    print(long_desc)
+    print(long_desc.text)
+
+    img_src = soup.find(attrs={"class":"woocommerce-product-gallery__image"})
+    print(4)
+    print(img_src)
+
+    print(5)
+    pattern = r'data-src="(.*?)"'
+    found_src = re.search(pattern, str(img_src))
+    print(found_src.group(1))
+
+    img_data = requests.get(found_src.group(1)).content
+
+    with open("test_img.jpg", "wb") as f:
+        f.write(img_data)
