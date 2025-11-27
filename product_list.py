@@ -14,7 +14,8 @@ if __name__ == "__main__":
     if response.ok:
         print("Got connection!!!")
     else:
-        print("Nothing!!!")
+        print("No connection!!!")
+        exit(1)
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -26,6 +27,12 @@ if __name__ == "__main__":
 
     print(count)
 
-    for product_iter in tag_li:
-        product_title = product_iter.find_all(attrs={"class":"woocommerce-LoopProduct-link woocommerce-loop-product__link"})
-        print(product_title[0].get('href'))
+    with open("product_list.txt", "w", encoding="utf-8") as f:
+        for product_iter in tag_li:
+            product_title = product_iter.find_all(attrs={"class":"woocommerce-LoopProduct-link woocommerce-loop-product__link"})
+            print(product_title[0].get('href'))
+
+            f.write(f"{product_title[0].get('href')}\n")
+
+# with open("file.txt", "r", encoding="utf-8") as f:
+#     print(f.read())
